@@ -2,18 +2,54 @@
 #include <string>
 
 using namespace std;
+void cypherExcuting();
+void decypherExcuting();
 void wholeAlphabetCyphering();
 void divideAlphabetInto2Halves();
 
 int main() {
-    int choice;
+    char choose;
+
+    do {
+        // Display menu options
+        cout << "Choose if You Want to Cipher or Decipher or Exit:\n";
+        cout << "1. Cipher \n";
+        cout << "2. Decipher \n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+
+        cin >> choose;
+        cin.ignore();
+
+        // Execute the chosen program or feature
+        switch (choose) {
+            case '1':
+                cypherExcuting();
+                break;
+            case '2':
+                decypherExcuting();
+                break;
+            case '3':
+                cout << "Exiting program. Goodbye!\n";
+                exit(0);
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+
+    } while (choose != '3');
+
+}
+
+void cypherExcuting() {
+    char choice;
 
     do {
         // Display menu options
         cout << "Choose The Atbash Cipher You Want:\n";
-        cout << "1. Whole Alphabet Cyphering \n";
-        cout << "2. Divide Alphabet Into 2 Halves \n";
-        cout << "3. Exit\n";
+        cout << "1. Whole Alphabet Ciphering \n";
+        cout << "2. Divide Alphabet Into 2 Halves Ciphering \n";
+        cout << "3. Back \n";
+        cout << "4. Exit \n";
         cout << "Enter your choice: ";
 
         cin >> choice;
@@ -21,22 +57,59 @@ int main() {
 
         // Execute the chosen program or feature
         switch (choice) {
-            case 1:
+            case '1':
                 wholeAlphabetCyphering();
                 break;
-            case 2:
+            case '2':
                 divideAlphabetInto2Halves();
                 break;
-            case 3:
+            case '3':
+                main();
+            case '4':
                 cout << "Exiting program. Goodbye!\n";
                 exit(0);
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
 
-    } while (choice != 3);
+    } while (choice != '4');
 
-    return 0;
+}
+
+void decypherExcuting() {
+    char choice;
+
+    do {
+        // Display menu options
+        cout << "Choose The Atbash Decipher You Want:\n";
+        cout << "1. Whole Alphabet Deciphering \n";
+        cout << "2. Divide Alphabet Into 2 Halves Deciphering \n";
+        cout << "3. Back \n";
+        cout << "4. Exit \n";
+        cout << "Enter your choice: ";
+
+        cin >> choice;
+        cin.ignore();
+
+        // Execute the chosen program or feature
+        switch (choice) {
+            case '1':
+                wholeAlphabetCyphering();
+                break;
+            case '2':
+                divideAlphabetInto2Halves();
+                break;
+            case '3':
+                main();
+            case '4':
+                cout << "Exiting program. Goodbye!\n";
+                exit(0);
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+
+    } while (choice != '4');
+
 }
 
 // Implementations of different programs or features
