@@ -6,7 +6,7 @@ void wholeAlphabetCyphering();
 void divideAlphabetInto2Halves();
 
 int main() {
-    char choice;
+    int choice;
 
     do {
         // Display menu options
@@ -21,27 +21,27 @@ int main() {
 
         // Execute the chosen program or feature
         switch (choice) {
-            case '1':
+            case 1:
                 wholeAlphabetCyphering();
                 break;
-            case '2':
+            case 2:
                 divideAlphabetInto2Halves();
                 break;
-            case '3':
+            case 3:
                 cout << "Exiting program. Goodbye!\n";
                 exit(0);
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
 
-    } while (choice != '4');
+    } while (choice != 3);
 
     return 0;
 }
 
 // Implementations of different programs or features
 void wholeAlphabetCyphering() {
-    cout << "Running Cypher of Whole Alphabet from A - Z ...\n";
+    cout << "Running Cypher Whole Alphabet from A - Z ...\n";
 
     string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string words;
@@ -66,7 +66,7 @@ void wholeAlphabetCyphering() {
 }
 
 void divideAlphabetInto2Halves() {
-    cout << "Running Cypher of With Dividing Alphabet Into 2 Halves ...\n";
+    cout << "Running Cypher With Dividing Alphabet Into 2 Halves ...\n";
 
     string alphabetHalve1 = "ABCDEFGHIJKLM";
     string alphabetHalve2 = "NOPQRSTUVWXYZ";
@@ -78,14 +78,15 @@ void divideAlphabetInto2Halves() {
 
     string cipheredWords = "";
 
-    for (char letter : words) {
+    for (char letter: words) {
         if (isalpha(letter)) {
-            if (letter >= 'A' && letter <= 'M') { // First half of the alphabet
+            if ((letter >= 'A' && letter <= 'M') || (letter >= 'a' && letter <= 'm')) { // First half of the alphabet
                 int position = alphabetHalve1.find(toupper(letter)) + 1;
                 int positionReversed = 13 - position + 1;
                 char letterReversed = alphabetHalve1[positionReversed - 1];
                 cipheredWords += letterReversed;
-            } else if (letter >= 'N' && letter <= 'Z') { // Second half of the alphabet
+            } else if (letter >= 'N' && letter <= 'Z' ||
+                       (letter >= 'n' && letter <= 'z')) { // Second half of the alphabet
                 int position = alphabetHalve2.find(toupper(letter)) + 1;
                 int positionReversed = 13 - position + 1;
                 char letterReversed = alphabetHalve2[positionReversed - 1];
@@ -94,11 +95,6 @@ void divideAlphabetInto2Halves() {
         }
     }
 
-    // Insert a space between the two halves of the ciphered words
-    int halfLength = cipheredWords.length() / 2;
-    cipheredWords.insert(halfLength, " ");
-
     cout << "The ciphered words is: " << cipheredWords << endl;
 
 }
-
