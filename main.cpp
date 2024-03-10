@@ -226,7 +226,3 @@ void divideAlphabetInto2Halves() {
     cout << "The ciphered words is: " << cipheredWords << endl;
 
 }
-
-    cout << "The ciphered words is: " << cipheredWords << endl;
-
-}
