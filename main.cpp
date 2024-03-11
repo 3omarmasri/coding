@@ -2,6 +2,8 @@
 #include <string>
 
 using namespace std;
+
+// Function prototypes
 void cypherExcuting();
 void decypherExcuting();
 void wholeAlphabetCyphering();
@@ -10,6 +12,7 @@ void divideAlphabetInto2Halves();
 int main() {
     char choose;
 
+    // Main menu loop
     do {
         // Display menu options
         cout << "Choose if You Want to Cipher or Decipher or Exit:\n";
@@ -18,8 +21,10 @@ int main() {
         cout << "C. Exit\n";
         cout << "Enter your choice: ";
 
+        // Input choice from user
         cin >> choose;
 
+        // Check for non-numeric input
         if (cin.peek() != '\n') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear(); // Clear the error flag on cin
@@ -28,9 +33,12 @@ int main() {
             continue; // Restart the loop
         }
 
+        // Convert lowercase input to uppercase
         if (choose == 'a' || choose == 'b' || choose == 'c') {
             choose = toupper(choose);
         }
+
+        // Validate choice
         if (choose != 'A' && choose != 'B' && choose != 'C') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear();
@@ -58,11 +66,13 @@ int main() {
     } while (choose != 'C');
 }
 
+// Function for executing the ciphering process
 void cypherExcuting() {
     char choice;
 
+    // Sub-menu loop for ciphering options
     do {
-        // Display menu options
+        // Display ciphering menu options
         cout << "Choose The Atbash Cipher You Want:\n";
         cout << "A. Whole Alphabet Ciphering \n";
         cout << "B. Divide Alphabet Into 2 Halves Ciphering \n";
@@ -70,8 +80,10 @@ void cypherExcuting() {
         cout << "D. Exit \n";
         cout << "Enter your choice: ";
 
+        // Input choice from user
         cin >> choice;
 
+        // Check for non-numeric input
         if (cin.peek() != '\n') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear(); // Clear the error flag on cin
@@ -80,9 +92,12 @@ void cypherExcuting() {
             continue; // Restart the loop
         }
 
+        // Convert lowercase input to uppercase
         if (choice == 'a' || choice == 'b' || choice == 'c' || choice == 'd') {
             choice = toupper(choice);
         }
+
+        // Validate choice
         if (choice != 'A' && choice != 'B' && choice != 'C' && choice != 'D') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear();
@@ -112,11 +127,13 @@ void cypherExcuting() {
     } while (choice != 'D');
 }
 
+// Function for executing the deciphering process
 void decypherExcuting() {
     char choice;
 
+    // Sub-menu loop for deciphering options
     do {
-        // Display menu options
+        // Display deciphering menu options
         cout << "Choose The Atbash Decipher You Want:\n";
         cout << "A. Whole Alphabet Deciphering \n";
         cout << "B. Divide Alphabet Into 2 Halves Deciphering \n";
@@ -124,8 +141,10 @@ void decypherExcuting() {
         cout << "D. Exit \n";
         cout << "Enter your choice: ";
 
+        // Input choice from user
         cin >> choice;
 
+        // Check for non-numeric input
         if (cin.peek() != '\n') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear(); // Clear the error flag on cin
@@ -134,16 +153,18 @@ void decypherExcuting() {
             continue; // Restart the loop
         }
 
+        // Convert lowercase input to uppercase
         if (choice == 'a' || choice == 'b' || choice == 'c' || choice == 'd') {
             choice = toupper(choice);
         }
+
+        // Validate choice
         if (choice != 'A' && choice != 'B' && choice != 'C' && choice != 'D') {
             cout << "Invalid choice. Please try again.\n";
             cin.clear();
             cin.ignore();
             continue;
         }
-
 
         cin.ignore();
 
@@ -167,7 +188,7 @@ void decypherExcuting() {
     } while (choice != 'D');
 }
 
-// Implementations of different programs or features
+// Function for ciphering the whole alphabet
 void wholeAlphabetCyphering() {
     cout << "Running Cypher Whole Alphabet from A - Z ...\n";
     cout << "Note: If You Entered a Non-Alphabet Character, It Will Be Ignored\n";
@@ -176,10 +197,12 @@ void wholeAlphabetCyphering() {
 
     cout << "Enter the words you want to cipher: ";
 
+    // Input words from user
     getline(cin, words);
 
     string cipheredWords = "";
 
+    // Ciphering process
     for (char letter : words) {
         if (isalpha(letter)) {
             int position = alphabet.find(toupper(letter)) + 1;
@@ -189,10 +212,11 @@ void wholeAlphabetCyphering() {
         }
     }
 
+    // Output ciphered words
     cout << "The ciphered words is: " << cipheredWords << endl;
-
 }
 
+// Function for ciphering alphabet into two halves
 void divideAlphabetInto2Halves() {
     cout << "Running Cypher With Dividing Alphabet Into 2 Halves ...\n";
     cout << "Note: If You Entered a Non-Alphabet Character, It Will Be Ignored\n";
@@ -202,10 +226,12 @@ void divideAlphabetInto2Halves() {
 
     cout << "Enter the words you want to cipher: ";
 
+    // Input words from user
     getline(cin, words);
 
     string cipheredWords = "";
 
+    // Ciphering process
     for (char letter: words) {
         if (isalpha(letter)) {
             if ((letter >= 'A' && letter <= 'M') || (letter >= 'a' && letter <= 'm')) { // First half of the alphabet
@@ -223,6 +249,6 @@ void divideAlphabetInto2Halves() {
         }
     }
 
+    // Output ciphered words
     cout << "The ciphered words is: " << cipheredWords << endl;
-
 }
