@@ -88,20 +88,20 @@ void simplify(Rational& rational) {
 int main() {
     while(true){
         string input;
-        cout << "\nEnter expression (or type 'exit'): ";
+        cout << "\nEnter expression and make sure operation is surrounded by spaces (or type 'exit'): ";
         getline(cin, input);
         for (char& c : input)
             c = tolower(c);
 
-        // Modified regex pattern to strictly match only one operation and ensure spaces around the operation
-        regex pattern("^\\s*(-?\\d+)\\s*/\\s*(-?\\d+)\\s*\\s([+\\-\\s/*])\\s\\s*(-?\\d+)\\s*/\\s*(-?\\d+)\\s*$");
+        // Modified regex pattern to match both fractions and whole numbers
+        regex pattern("^\\s*(-?\\d+)(/(-?\\d+))?\\s*\\s([+\\-\\s/*])\\s\\s*(-?\\d+)(/(-?\\d+))?\\s*$");
         smatch match;
 
         if (regex_search(input, match, pattern)) {
-            Rational operand1 = parseFraction(match[1].str() + "/" + match[2].str());
-            Rational operand2 = parseFraction(match[4].str() + "/" + match[5].str());
+            Rational operand1 = match[3].str().empty() ? Rational{stoi(match[1]), 1} : parseFraction(match[1].str() + "/" + match[3].str());
+            Rational operand2 = match[7].str().empty() ? Rational{stoi(match[5]), 1} : parseFraction(match[5].str() + "/" + match[7].str());
 
-            char op = match[3].str()[0];
+            char op = match[4].str()[0];
             if (operand1.denominator == 0 || operand2.denominator == 0) {
                 cout << "\nYou cannot divide by zero\n";
                 continue;
