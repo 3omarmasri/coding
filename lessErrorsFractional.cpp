@@ -4,7 +4,7 @@
 #include <numeric>
 #include <cctype>
 #include <stdexcept>
-
+// error: whole number
 using namespace std;
 
 // Structure definition
@@ -93,20 +93,15 @@ int main() {
         for (char& c : input)
             c = tolower(c);
 
-        // Modified regex pattern to correctly parse the input
-        regex pattern("^\\s*((-?\\d+)(\\s*/\\s*(-?\\d+))?)\\s*([+\\-\\s/*])\\s*((-?\\d+)(\\s*/\\s*(-?\\d+))?)\\s*$");
+        // Modified regex pattern to strictly match only one operation and ensure spaces around the operation
+        regex pattern("^\\s*(-?\\d+)\\s*/\\s*(-?\\d+)\\s*\\s([+\\-\\s/*])\\s\\s*(-?\\d+)\\s*/\\s*(-?\\d+)\\s*$");
         smatch match;
 
         if (regex_search(input, match, pattern)) {
-            string numerator1 = match[2].str();
-            string denominator1 = match[4].str().empty() ? "1" : match[4].str(); // If denominator is empty, set it to 1
-            string numerator2 = match[7].str();
-            string denominator2 = match[9].str().empty() ? "1" : match[9].str(); // If denominator is empty, set it to 1
+            Rational operand1 = parseFraction(match[1].str() + "/" + match[2].str());
+            Rational operand2 = parseFraction(match[4].str() + "/" + match[5].str());
 
-            Rational operand1 = parseFraction(numerator1 + "/" + denominator1);
-            Rational operand2 = parseFraction(numerator2 + "/" + denominator2);
-
-            char op = match[5].str()[0];
+            char op = match[3].str()[0];
             if (operand1.denominator == 0 || operand2.denominator == 0) {
                 cout << "\nYou cannot divide by zero\n";
                 continue;
@@ -137,7 +132,6 @@ int main() {
             else
                 cout << " " << result.numerator << "/" << result.denominator << endl;
         }
-
         else if (input == "exit"){
             break;
         }
@@ -148,3 +142,37 @@ int main() {
     }
     return 0;
 }
+//    Rational operand1 = parseFraction(match[1].str() + "/" + match[2].str());
+//    Rational operand2 = parseFraction(match[4].str() + "/" + match[5].str());
+//
+//    char op = match[3].str()[0];
+//    if (operand1.denominator == 0 || operand2.denominator == 0) {
+//        cout << "\nYou cannot divide by zero\n";
+//        continue;
+//    }
+//    Rational result;
+//    switch (op) {
+//        case '+':
+//            result = add(operand1, operand2);
+//            break;
+//        case '-':
+//            result = subtract(operand1, operand2);
+//            break;
+//        case '*':
+//            result = multiply(operand1, operand2);
+//            break;
+//        case '/':
+//            if (operand2.numerator == 0) {
+//                cout << "\nYou cannot divide by zero\n";
+//                continue;
+//            }
+//            result = divide(operand1, operand2);
+//            break;
+//    }
+//    cout << "Result: ";
+//    simplify(result); // Simplify the result
+//    if (result.denominator == 1)
+//        cout << " " << result.numerator << endl;
+//    else
+//        cout << " " << result.numerator << "/" << result.denominator << endl;
+//}
